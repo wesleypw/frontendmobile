@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portal mobile-first para acompanhar a temporada esportiva. Calendário, classificação e notícias em tempo real.">
+  <title>Portal Esportivo - Temporada 2026</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Skip Link para Acessibilidade -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Header / Banner -->
+  <header role="banner" class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="site-title">
+          <a href="/">Portal Esportivo</a>
+        </h1>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Abrir menu">
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+          <span class="hamburger"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navegação Principal -->
+  <nav role="navigation" aria-label="Navegação principal" class="main-nav" id="primary-menu">
+    <div class="container">
+      <ul class="nav-list">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#noticias" class="nav-link">Notícias</a></li>
+        <li><a href="#calendario" class="nav-link">Calendário</a></li>
+        <li><a href="#classificacao" class="nav-link">Classificação</a></li>
+        <li><a href="#galeria" class="nav-link">Galeria</a></li>
+        <li><a href="#contato" class="nav-link">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <main role="main" id="main-content" class="site-main">
+    <div class="container">
+
+      <!-- Seção Destaque -->
+      <section aria-labelledby="heading-destaque" class="section-destaque">
+        <h2 id="heading-destaque" class="section-title">Destaque</h2>
+        <article class="featured-card">
+          <div class="featured-image">
+            <img src="https://via.placeholder.com/800x400/1e40af/ffffff?text=Jogo+da+Final"
+                 alt="Estádio lotado para a final do campeonato"
+                 width="800"
+                 height="400"
+                 loading="eager">
+          </div>
+          <div class="featured-content">
+            <span class="tag tag-primary">Final</span>
+            <h3 class="featured-title">Grande Decisão: Título Definido neste Domingo</h3>
+            <p class="featured-excerpt">
+              As duas melhores equipes da temporada se enfrentam na grande final.
+              Confira tudo sobre o jogo, horários e onde assistir.
+            </p>
+            <a href="#" class="btn btn-primary">Ler matéria completa</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Seção Notícias -->
+      <section aria-labelledby="heading-noticias" class="section-noticias" id="noticias">
+        <div class="section-header">
+          <h2 id="heading-noticias" class="section-title">Últimas Notícias</h2>
+          <div class="search-box">
+            <label for="search-input" class="visually-hidden">Buscar notícias</label>
+            <input type="search" id="search-input" class="search-input" placeholder="Buscar notícias..." aria-label="Buscar notícias">
+          </div>
+        </div>
+
+        <div class="news-grid">
+          <article class="news-card">
+            <div class="news-image">
+              <img src="https://via.placeholder.com/400x250/3b82f6/ffffff?text=Treino"
+                   alt="Equipe em treinamento no estádio"
+                   width="400"
+                   height="250"
+                   loading="lazy">
+            </div>
+            <div class="news-content">
+              <span class="tag tag-secondary">Treino</span>
+              <h3 class="news-title">Preparação Intensa para a Final</h3>
+              <p class="news-excerpt">
+                Comissão técnica intensifica treinos táticos na última semana antes da decisão.
+              </p>
+              <time class="news-date" datetime="2026-10-07">07/10/2026</time>
+              <button class="btn-favorite" aria-label="Adicionar aos favoritos">
+                <span class="icon-heart" aria-hidden="true"></span>
+              </button>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <div class="news-image">
+              <img src="https://via.placeholder.com/400x250/10b981/ffffff?text=Lesão"
+                   alt="Médico avaliando jogador"
+                   width="400"
+                   height="250"
+                   loading="lazy">
+            </div>
+            <div class="news-content">
+              <span class="tag tag-warning">Médico</span>
+              <h3 class="news-title">Recuperação de Jogador Acelera</h3>
+              <p class="news-excerpt">
+                Atacante que se recuperava de lesão já treina com o grupo e pode ser relacionado.
+              </p>
+              <time class="news-date" datetime="2026-10-06">06/10/2026</time>
+              <button class="btn-favorite" aria-label="Adicionar aos favoritos">
+                <span class="icon-heart" aria-hidden="true"></span>
+              </button>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <div class="news-image">
+              <img src="https://via.placeholder.com/400x250/f59e0b/ffffff?text=Transferência"
+                   alt="Assinatura de contrato"
+                   width="400"
+                   height="250"
+                   loading="lazy">
+            </div>
+            <div class="news-content">
+              <span class="tag tag-info">Mercado</span>
+              <h3 class="news-title">Novo Contrato Renovado até 2028</h3>
+              <p class="news-excerpt">
+                Clube anuncia renovação de contrato com jovem promessa do elenco.
+              </p>
+              <time class="news-date" datetime="2026-10-05">05/10/2026</time>
+              <button class="btn-favorite" aria-label="Adicionar aos favoritos">
+                <span class="icon-heart" aria-hidden="true"></span>
+              </button>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <div class="news-image">
+              <img src="https://via.placeholder.com/400x250/ef4444/ffffff?text=Expulsão"
+                   alt="Cartão vermelho sendo mostrado"
+                   width="400"
+                   height="250"
+                   loading="lazy">
+            </div>
+            <div class="news-content">
+              <span class="tag tag-danger">Punição</span>
+              <h3 class="news-title">Suspensão Confirmada para Decisão</h3>
+              <p class="news-excerpt">
+                Tribunal confirma suspensão de jogador por acumulo de cartões amarelos.
+              </p>
+              <time class="news-date" datetime="2026-10-04">04/10/2026</time>
+              <button class="btn-favorite" aria-label="Adicionar aos favoritos">
+                <span class="icon-heart" aria-hidden="true"></span>
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div class="section-footer">
+          <button class="btn btn-outline" id="load-more-news">Carregar mais notícias</button>
+        </div>
+      </section>
+
+      <!-- Seção Calendário -->
+      <section aria-labelledby="heading-calendario" class="section-calendario" id="calendario">
+        <h2 id="heading-calendario" class="section-title">Calendário de Jogos</h2>
+
+        <div class="calendar-filters">
+          <fieldset>
+            <legend class="visually-hidden">Filtrar calendário</legend>
+            <label for="filter-round" class="visually-hidden">Rodada</label>
+            <select id="filter-round" class="filter-select">
+              <option value="all">Todas as rodadas</option>
+              <option value="38" selected>Rodada 38 (Final)</option>
+              <option value="37">Rodada 37</option>
+              <option value="36">Rodada 36</option>
+            </select>
+          </fieldset>
+        </div>
+
+        <div class="matches-list">
+          <article class="match-card match-live">
+            <div class="match-header">
+              <span class="match-status live">Ao vivo</span>
+              <time class="match-time" datetime="2026-10-08T16:00">Hoje, 16:00</time>
+            </div>
+            <div class="match-teams">
+              <div class="team team-home">
+                <img src="https://via.placeholder.com/60x60/1e40af/ffffff?text=TEC"
+                     alt="Escudo do Time do Centro"
+                     width="60"
+                     height="60"
+                     loading="lazy">
+                <span class="team-name">Time do Centro</span>
+              </div>
+              <div class="match-score">
+                <span class="score">2 - 1</span>
+                <span class="match-period">2º tempo</span>
+              </div>
+              <div class="team team-away">
+                <img src="https://via.placeholder.com/60x60/dc2626/ffffff?text=TLN"
+                     alt="Escudo do Time do Leste"
+                     width="60"
+                     height="60"
+                     loading="lazy">
+                <span class="team-name">Time do Leste</span>
+              </div>
+            </div>
+            <div class="match-footer">
+              <span class="stadium">Estádio Nacional</span>
+              <a href="#" class="btn-sm">Assistir</a>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <div class="match-header">
+              <span class="match-status scheduled">Agendado</span>
+              <time class="match-time" datetime="2026-10-11T19:00">Sábado, 19:00</time>
+            </div>
+            <div class="match-teams">
+              <div class="team team-home">
+                <img src="https://via.placeholder.com/60x60/059669/ffffff?text=TN"
+                     alt="Escudo do Time do Norte"
+                     width="60"
+                     height="60"
+                     loading="lazy">
+                <span class="team-name">Time do Norte</span>
+              </div>
+              <div class="match-score">
+                <span class="score-vs">VS</span>
+              </div>
+              <div class="team team-away">
+                <img src="https://via.placeholder.com/60x60/7c3aed/ffffff?text=TS"
+                     alt="Escudo do Time do Sul"
+                     width="60"
+                     height="60"
+                     loading="lazy">
+                <span class="team-name">Time do Sul</span>
+              </div>
+            </div>
+            <div class="match-footer">
+              <span class="stadium">Arena do Norte</span>
+              <a href="#" class="btn-sm">Detalhes</a>
+            </div>
+          </article>
+
+          <article class="match-card">
+            <div class="match-header">
+              <span class="match-status finished">Finalizado</span>
+              <time class="match-time" datetime="2026-10-04T15:30">04/10, 15:30</time>
+            </div>
+            <div class="match-teams">
+              <div class="team team-home">
+                <img src="https://via.placeholder.com/60x60/d97706/ffffff?text=TO"
+                     alt="Escudo do Time do Oeste"
+                     width="60"
+                 height="60"
+                 loading="lazy">
+                <span class="team-name">Time do Oeste</span>
+              </div>
+              <div class="match-score">
+                <span class="score">1 - 0</span>
+              </div>
+              <div class="team team-away">
+                <img src="https://via.placeholder.com/60x60/0891b2/ffffff?text=TE"
+                     alt="Escudo do Time do Leste"
+                     width="60"
+                 height="60"
+                 loading="lazy">
+                <span class="team-name">Time do Leste</span>
+              </div>
+            </div>
+            <div class="match-footer">
+              <span class="stadium">Estádio do Oeste</span>
+              <a href="#" class="btn-sm">Resumo</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Seção Classificação -->
+      <section aria-labelledby="heading-classificacao" class="section-classificacao" id="classificacao">
+        <h2 id="heading-classificacao" class="section-title">Classificação</h2>
+
+        <div class="table-responsive">
+          <table class="standings-table">
+            <caption>Classificação geral do campeonato</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="col-pos">#</th>
+                <th scope="col" class="col-team">Time</th>
+                <th scope="col" class="col-p">P</th>
+                <th scope="col" class="col-j">J</th>
+                <th scope="col" class="col-v">V</th>
+                <th scope="col" class="col-e">E</th>
+                <th scope="col" class="col-d">D</th>
+                <th scope="col" class="col-gp">GP</th>
+                <th scope="col" class="col-gc">GC</th>
+                <th scope="col" class="col-sg">SG</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-champion">
+                <td class="col-pos">1</td>
+                <td class="col-team">
+                  <img src="https://via.placeholder.com/30x30/1e40af/ffffff?text=TEC"
+                       alt=""
+                       width="30"
+                       height="30"
+                       loading="lazy">
+                  Time do Centro
+                </td>
+                <td class="col-p">78</td>
+                <td class="col-j">38</td>
+                <td class="col-v">24</td>
+                <td class="col-e">6</td>
+                <td class="col-d">8</td>
+                <td class="col-gp">72</td>
+                <td class="col-gc">32</td>
+                <td class="col-sg">+40</td>
+              </tr>
+              <tr class="row-libertadores">
+                <td class="col-pos">2</td>
+                <td class="col-team">
+                  <img src="https://via.placeholder.com/30x30/dc2626/ffffff?text=TLN"
+                       alt=""
+                       width="30"
+                       height="30"
+                       loading="lazy">
+                  Time do Leste
+                </td>
+                <td class="col-p">75</td>
+                <td class="col-j">38</td>
+                <td class="col-v">23</td>
+                <td class="col-e">6</td>
+                <td class="col-d">9</td>
+                <td class="col-gp">68</td>
+                <td class="col-gc">35</td>
+                <td class="col-sg">+33</td>
+              </tr>
+              <tr class="row-libertadores">
+                <td class="col-pos">3</td>
+                <td class="col-team">
+                  <img src="https://via.placeholder.com/30x30/059669/ffffff?text=TN"
+                       alt=""
+                       width="30"
+                       height="30"
+                       loading="lazy">
+                  Time do Norte
+                </td>
+                <td class="col-p">70</td>
+                <td class="col-j">38</td>
+                <td class="col-v">21</td>
+                <td class="col-e">7</td>
+                <td class="col-d">10</td>
+                <td class="col-gp">65</td>
+                <td class="col-gc">38</td>
+                <td class="col-sg">+27</td>
+              </tr>
+              <tr class="row-sulamericana">
+                <td class="col-pos">4</td>
+                <td class="col-team">
+                  <img src="https://via.placeholder.com/30x30/7c3aed/ffffff?text=TS"
+                       alt=""
+                       width="30"
+                       height="30"
+                       loading="lazy">
+                  Time do Sul
+                </td>
+                <td class="col-p">65</td>
+                <td class="col-j">38</td>
+                <td class="col-v">19</td>
+                <td class="col-e">8</td>
+                <td class="col-d">11</td>
+                <td class="col-gp">58</td>
+                <td class="col-gc">40</td>
+                <td class="col-sg">+18</td>
+              </tr>
+              <tr class="row-sulamericana">
+                <td class="col-pos">5</td>
+                <td class="col-team">
+                  <img src="https://via.placeholder.com/30x30/d97706/ffffff?text=TO"
+                       alt=""
+                       width="30"
+                       height="30"
+                       loading="lazy">
+                  Time do Oeste
+                </td>
+                <td class="col-p">62</td>
+                <td class="col-j">38</td>
+                <td class="col-v">18</td>
+                <td class="col-e">8</td>
+                <td class="col-d">12</td>
+                <td class="col-gp">55</td>
+                <td class="col-gc">42</td>
+                <td class="col-sg">+13</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="legend">
+          <p class="legend-item"><span class="legend-dot champion"></span> Campeão</p>
+          <p class="legend-item"><span class="legend-dot libertadores"></span> Libertadores</p>
+          <p class="legend-item"><span class="legend-dot sulamericana"></span> Sul-Americana</p>
+        </div>
+      </section>
+
+      <!-- Seção Galeria -->
+      <section aria-labelledby="heading-galeria" class="section-galeria" id="galeria">
+        <h2 id="heading-galeria" class="section-title">Galeria de Fotos</h2>
+
+        <div class="gallery-container" role="region" aria-label="Galeria de fotos">
+          <div class="gallery-track">
+            <figure class="gallery-item active">
+              <img src="https://via.placeholder.com/600x400/1e40af/ffffff?text=Foto+1"
+                   alt="Celebração de gol no estádio"
+                   width="600"
+                   height="400"
+                   loading="lazy">
+              <figcaption>Celebração épica</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img src="https://via.placeholder.com/600x400/3b82f6/ffffff?text=Foto+2"
+                   alt="Torcida vibrando nas arquibancadas"
+                   width="600"
+                   height="400"
+                   loading="lazy">
+              <figcaption>Torcida apaixonada</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img src="https://via.placeholder.com/600x400/10b981/ffffff?text=Foto+3"
+                   alt="Jogador comemorando título"
+                   width="600"
+                   height="400"
+                   loading="lazy">
+              <figcaption>Título conquistado</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img src="https://via.placeholder.com/600x400/f59e0b/ffffff?text=Foto+4"
+                   alt="Treino tático em campo"
+                   width="600"
+                   height="400"
+                   loading="lazy">
+              <figcaption>Preparação tática</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img src="https://via.placeholder.com/600x400/ef4444/ffffff?text=Foto+5"
+                   alt="Entrega da taça"
+                   width="600"
+                   height="400"
+                   loading="lazy">
+              <figcaption>Entrega da taça</figcaption>
+            </figure>
+          </div>
+
+          <div class="gallery-controls">
+            <button class="gallery-btn gallery-prev" aria-label="Foto anterior">
+              <span aria-hidden="true">←</span>
+            </button>
+            <div class="gallery-dots" role="tablist" aria-label="Selecionar foto">
+              <button class="gallery-dot active" role="tab" aria-selected="true" aria-label="Foto 1 de 5"></button>
+              <button class="gallery-dot" role="tab" aria-selected="false" aria-label="Foto 2 de 5"></button>
+              <button class="gallery-dot" role="tab" aria-selected="false" aria-label="Foto 3 de 5"></button>
+              <button class="gallery-dot" role="tab" aria-selected="false" aria-label="Foto 4 de 5"></button>
+              <button class="gallery-dot" role="tab" aria-selected="false" aria-label="Foto 5 de 5"></button>
+            </div>
+            <button class="gallery-btn gallery-next" aria-label="Próxima foto">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Contato/Formulário -->
+      <section aria-labelledby="heading-contato" class="section-contato" id="contato">
+        <h2 id="heading-contato" class="section-title">Entre em Contato</h2>
+
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Informações</h3>
+            <p>Envie suas dúvidas, sugestões ou reporte problemas através do formulário.</p>
+            <address>
+              <p><strong>Email:</strong> contato@portalesportivo.com</p>
+              <p><strong>Telefone:</strong> (11) 1234-5678</p>
+              <p><strong>Endereço:</strong> Rua do Esporte, 123 - São Paulo, SP</p>
+            </address>
+          </div>
+
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-group">
+              <label for="name">Nome completo <span class="required" aria-label="obrigatório">*</span></label>
+              <input type="text" id="name" name="name" required aria-required="true"
+                     aria-describedby="name-error">
+              <span class="error-message" id="name-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email <span class="required" aria-label="obrigatório">*</span></label>
+              <input type="email" id="email" name="email" required aria-required="true"
+                     aria-describedby="email-error">
+              <span class="error-message" id="email-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Assunto <span class="required" aria-label="obrigatório">*</span></label>
+              <select id="subject" name="subject" required aria-required="true"
+                      aria-describedby="subject-error">
+                <option value="">Selecione um assunto</option>
+                <option value="duvida">Dúvida</option>
+                <option value="sugestao">Sugestão</option>
+                <option value="problema">Reportar problema</option>
+                <option value="outro">Outro</option>
+              </select>
+              <span class="error-message" id="subject-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Mensagem <span class="required" aria-label="obrigatório">*</span></label>
+              <textarea id="message" name="message" rows="5" required aria-required="true"
+                        aria-describedby="message-error"></textarea>
+              <span class="error-message" id="message-error" role="alert"></span>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="consent" name="consent" required aria-required="true"
+                     aria-describedby="consent-error">
+              <label for="consent">Concordo com o processamento dos meus dados para contato <span class="required" aria-label="obrigatório">*</span></label>
+              <span class="error-message" id="consent-error" role="alert"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Enviar mensagem</button>
+          </form>
+
+          <div class="form-success" id="form-success" role="status" aria-live="polite" hidden>
+            <p>Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
+            <button type="button" class="btn btn-outline" id="form-reset">Enviar outra mensagem</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer / Contentinfo -->
+  <footer role="contentinfo" class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Sobre</h3>
+          <p>Portal esportivo dedicado a acompanhar a temporada 2026 com notícias, calendário e classificação em tempo real.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Links Rápidos</h3>
+          <nav aria-label="Links do rodapé">
+            <ul class="footer-links">
+              <li><a href="#noticias">Notícias</a></li>
+              <li><a href="#calendario">Calendário</a></li>
+              <li><a href="#classificacao">Classificação</a></li>
+              <li><a href="#contato">Contato</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <nav aria-label="Links legais">
+            <ul class="footer-links">
+              <li><a href="#">Termos de uso</a></li>
+              <li><a href="#">Política de privacidade</a></li>
+              <li><a href="#">Cookies</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Portal Esportivo. Todos os direitos reservados.</p>
+        <p class="disclaimer">Conteúdo fictício para fins educacionais.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js" defer></script>
+</body>
+</html>
