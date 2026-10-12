@@ -1,15 +1,14 @@
 /**
- * Portal Esportivo - JavaScript Principal
- * Interações nativas sem dependências externas
+ * Torneio FIFA - JavaScript Principal
+ * Sorteador de times para torneio de FIFA
  */
 
 document.addEventListener('DOMContentLoaded', function() {
   initMobileMenu();
-  initGallery();
-  initContactForm();
-  initFavorites();
-  initSearch();
-  initLoadMore();
+  initPlayersForm();
+  initTeamsForm();
+  initDraw();
+  initResults();
 });
 
 /**
@@ -50,446 +49,375 @@ function initMobileMenu() {
 }
 
 /**
- * Galeria/Carrossel
- * Suporte a Pointer Events e botões
+ * Estado Global
  */
-function initGallery() {
-  const galleryContainer = document.querySelector('.gallery-container');
-  if (!galleryContainer) return;
-
-  const track = galleryContainer.querySelector('.gallery-track');
-  const items = galleryContainer.querySelectorAll('.gallery-item');
-  const dots = galleryContainer.querySelectorAll('.gallery-dot');
-  const prevBtn = galleryContainer.querySelector('.gallery-prev');
-  const nextBtn = galleryContainer.querySelector('.gallery-next');
-
-  if (!track || items.length === 0) return;
-
-  let currentIndex = 0;
-  const totalItems = items.length;
-
-  // Função para mostrar item
-  function showItem(index) {
-    // Validar índice
-    if (index < 0) index = totalItems - 1;
-    if (index >= totalItems) index = 0;
-
-    currentIndex = index;
-
-    // Atualizar itens
-    items.forEach((item, i) => {
-      item.classList.toggle('active', i === currentIndex);
-      item.hidden = i !== currentIndex;
-    });
-
-    // Atualizar dots
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
-      dot.setAttribute('aria-selected', i === currentIndex);
-    });
-
-    // Atualizar estado acessível
-    galleryContainer.setAttribute('aria-label', `Galeria de fotos - Foto ${currentIndex + 1} de ${totalItems}`);
-  }
-
-  // Botão anterior
-  if (prevBtn) {
-    prevBtn.addEventListener('click', function() {
-      showItem(currentIndex - 1);
-    });
-  }
-
-  // Botão próximo
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function() {
-      showItem(currentIndex + 1);
-    });
-  }
-
-  // Dots
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', function() {
-      showItem(index);
-    });
-  });
-
-  // Pointer Events para swipe
-  let startX = 0;
-  let isDragging = false;
-
-  track.addEventListener('pointerdown', function(e) {
-    startX = e.clientX;
-    isDragging = true;
-    track.setPointerCapture(e.pointerId);
-  });
-
-  track.addEventListener('pointermove', function(e) {
-    if (!isDragging) return;
-    const diff = e.clientX - startX;
-    // Visual feedback opcional
-  });
-
-  track.addEventListener('pointerup', function(e) {
-    if (!isDragging) return;
-    isDragging = false;
-    const diff = e.clientX - startX;
-    track.releasePointerCapture(e.pointerId);
-
-    // Threshold para swipe
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        showItem(currentIndex - 1);
-      } else {
-        showItem(currentIndex + 1);
-      }
-    }
-  });
-
-  track.addEventListener('pointercancel', function(e) {
-    isDragging = false;
-    track.releasePointerCapture(e.pointerId);
-  });
-
-  // Navegação por teclado
-  galleryContainer.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowLeft') {
-      showItem(currentIndex - 1);
-      e.preventDefault();
-    } else if (e.key === 'ArrowRight') {
-      showItem(currentIndex + 1);
-      e.preventDefault();
-    }
-  });
-
-  // Inicializar
-  showItem(0);
-}
+let players = [];
+let teams = [];
+let drawResults = [];
 
 /**
- * Formulário de Contato
- * Validação nativa com mensagens customizadas
+ * Formulário de Jogadores
  */
-function initContactForm() {
-  const form = document.getElementById('contact-form');
-  const formSuccess = document.getElementById('form-success');
-  const formReset = document.getElementById('form-reset');
+function initPlayersForm() {
+  const form = document.getElementById('players-form');
+  const playersList = document.getElementById('players-list');
+  const playersCount = document.getElementById('players-count');
+  const emptyPlayers = document.getElementById('empty-players');
+  const clearPlayersBtn = document.getElementById('clear-players');
 
   if (!form) return;
 
-  // Validação em tempo real
-  const inputs = form.querySelectorAll('input, select, textarea');
-  inputs.forEach(input => {
-    input.addEventListener('blur', function() {
-      validateField(this);
-    });
+  // Carregar jogadores do localStorage
+  loadPlayers();
 
-    input.addEventListener('input', function() {
-      // Limpar erro ao digitar
-      const errorSpan = document.getElementById(`${this.id}-error`);
-      if (errorSpan && this.checkValidity()) {
-        errorSpan.textContent = '';
-      }
-    });
-  });
-
-  function validateField(field) {
-    const errorSpan = document.getElementById(`${field.id}-error`);
-    if (!errorSpan) return;
-
-    if (field.validity.valid) {
-      errorSpan.textContent = '';
-      return true;
-    }
-
-    // Mensagens customizadas
-    if (field.validity.valueMissing) {
-      errorSpan.textContent = 'Este campo é obrigatório';
-    } else if (field.validity.typeMismatch && field.type === 'email') {
-      errorSpan.textContent = 'Por favor, insira um email válido';
-    } else if (field.validity.tooShort) {
-      errorSpan.textContent = `Mínimo de ${field.minLength} caracteres`;
-    } else {
-      errorSpan.textContent = 'Valor inválido';
-    }
-
-    return false;
-  }
-
-  // Submit do formulário
+  // Adicionar jogador
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    const input = document.getElementById('player-name');
+    const name = input.value.trim();
 
-    let isValid = true;
-    inputs.forEach(input => {
-      if (!validateField(input)) {
-        isValid = false;
+    if (name) {
+      players.push(name);
+      savePlayers();
+      renderPlayers();
+      input.value = '';
+      input.focus();
+      updateDrawInfo();
+    }
+  });
+
+  // Limpar lista
+  if (clearPlayersBtn) {
+    clearPlayersBtn.addEventListener('click', function() {
+      if (confirm('Tem certeza que deseja limpar a lista de jogadores?')) {
+        players = [];
+        savePlayers();
+        renderPlayers();
+        updateDrawInfo();
       }
     });
-
-    if (isValid) {
-      // Simular envio
-      const submitBtn = form.querySelector('button[type="submit"]');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando...';
-
-      setTimeout(() => {
-        form.hidden = true;
-        formSuccess.hidden = false;
-
-        // Anunciar sucesso para leitores de tela
-        formSuccess.querySelector('p').textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensagem';
-      }, 1500);
-    }
-  });
-
-  // Reset do formulário
-  if (formReset) {
-    formReset.addEventListener('click', function() {
-      form.reset();
-      form.hidden = false;
-      formSuccess.hidden = true;
-
-      // Limpar mensagens de erro
-      inputs.forEach(input => {
-        const errorSpan = document.getElementById(`${input.id}-error`);
-        if (errorSpan) errorSpan.textContent = '';
-      });
-
-      // Focar no primeiro campo
-      inputs[0].focus();
-    });
-  }
-}
-
-/**
- * Sistema de Favoritos
- * Persistência em localStorage com consentimento
- */
-function initFavorites() {
-  const favoriteButtons = document.querySelectorAll('.btn-favorite');
-
-  if (favoriteButtons.length === 0) return;
-
-  // Carregar favoritos do localStorage
-  let favorites = [];
-  try {
-    const stored = localStorage.getItem('portal-favoritos');
-    if (stored) {
-      favorites = JSON.parse(stored);
-    }
-  } catch (e) {
-    console.warn('Não foi possível carregar favoritos:', e);
   }
 
-  // Atualizar estado inicial dos botões
-  favoriteButtons.forEach((btn, index) => {
-    const newsCard = btn.closest('.news-card');
-    const newsTitle = newsCard.querySelector('.news-title').textContent;
-    const newsId = `news-${index}`;
+  function renderPlayers() {
+    playersList.innerHTML = '';
+    playersCount.textContent = players.length;
 
-    if (favorites.includes(newsId)) {
-      btn.classList.add('active');
-      btn.setAttribute('aria-label', 'Remover dos favoritos');
-    }
-
-    // Delegação de evento
-    btn.addEventListener('click', function() {
-      toggleFavorite(newsId, this, newsTitle);
-    });
-  });
-
-  function toggleFavorite(newsId, button, title) {
-    const index = favorites.indexOf(newsId);
-    let message = '';
-
-    if (index > -1) {
-      // Remover
-      favorites.splice(index, 1);
-      button.classList.remove('active');
-      button.setAttribute('aria-label', 'Adicionar aos favoritos');
-      message = `"${title}" removido dos favoritos`;
-    } else {
-      // Adicionar
-      favorites.push(newsId);
-      button.classList.add('active');
-      button.setAttribute('aria-label', 'Remover dos favoritos');
-      message = `"${title}" adicionado aos favoritos`;
-    }
-
-    // Salvar no localStorage
-    try {
-      localStorage.setItem('portal-favoritos', JSON.stringify(favorites));
-    } catch (e) {
-      console.warn('Não foi possível salvar favoritos:', e);
-    }
-
-    // Anunciar mudança
-    announceToScreenReader(message);
-  }
-
-  function announceToScreenReader(message) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'visually-hidden';
-    announcement.textContent = message;
-    document.body.appendChild(announcement);
-
-    setTimeout(() => {
-      document.body.removeChild(announcement);
-    }, 1000);
-  }
-}
-
-/**
- * Busca de Notícias
- * Filtro em tempo real com atualização de estado
- */
-function initSearch() {
-  const searchInput = document.getElementById('search-input');
-  const newsCards = document.querySelectorAll('.news-card');
-
-  if (!searchInput || newsCards.length === 0) return;
-
-  searchInput.addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase().trim();
-    let visibleCount = 0;
-
-    newsCards.forEach(card => {
-      const title = card.querySelector('.news-title').textContent.toLowerCase();
-      const excerpt = card.querySelector('.news-excerpt').textContent.toLowerCase();
-
-      const matches = title.includes(searchTerm) || excerpt.includes(searchTerm);
-
-      if (matches || searchTerm === '') {
-        card.hidden = false;
-        visibleCount++;
-      } else {
-        card.hidden = true;
-      }
-    });
-
-    // Atualizar estado acessível
-    const statusMessage = searchTerm === ''
-      ? `Mostrando todas as ${newsCards.length} notícias`
-      : `${visibleCount} notícia(s) encontrada(s) para "${searchTerm}"`;
-
-    announceToScreenReader(statusMessage);
-  });
-
-  function announceToScreenReader(message) {
-    const existing = document.querySelector('.search-status');
-    if (existing) {
-      existing.textContent = message;
+    if (players.length === 0) {
+      playersList.innerHTML = '<li class="empty-message" id="empty-players">Nenhum jogador cadastrado ainda</li>';
       return;
     }
 
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'search-status visually-hidden';
-    announcement.textContent = message;
-    document.body.appendChild(announcement);
+    players.forEach((player, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${player}</span>
+        <button type="button" class="remove-btn" data-index="${index}" aria-label="Remover ${player}">Remover</button>
+      `;
+      playersList.appendChild(li);
+    });
+
+    // Adicionar eventos de remoção
+    playersList.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-index'));
+        players.splice(index, 1);
+        savePlayers();
+        renderPlayers();
+        updateDrawInfo();
+      });
+    });
+  }
+
+  function savePlayers() {
+    try {
+      localStorage.setItem('fifa-players', JSON.stringify(players));
+    } catch (e) {
+      console.warn('Não foi possível salvar jogadores:', e);
+    }
+  }
+
+  function loadPlayers() {
+    try {
+      const stored = localStorage.getItem('fifa-players');
+      if (stored) {
+        players = JSON.parse(stored);
+        renderPlayers();
+        updateDrawInfo();
+      }
+    } catch (e) {
+      console.warn('Não foi possível carregar jogadores:', e);
+    }
   }
 }
 
 /**
- * Carregar Mais Notícias
- * Simulação de lazy loading
+ * Formulário de Times
  */
-function initLoadMore() {
-  const loadMoreBtn = document.getElementById('load-more-news');
-  const newsGrid = document.querySelector('.news-grid');
+function initTeamsForm() {
+  const form = document.getElementById('teams-form');
+  const teamsList = document.getElementById('teams-list');
+  const teamsCount = document.getElementById('teams-count');
+  const emptyTeams = document.getElementById('empty-teams');
+  const clearTeamsBtn = document.getElementById('clear-teams');
 
-  if (!loadMoreBtn || !newsGrid) return;
+  if (!form) return;
 
-  loadMoreBtn.addEventListener('click', function() {
-    // Simular carregamento
-    this.disabled = true;
-    this.textContent = 'Carregando...';
+  // Carregar times do localStorage
+  loadTeams();
 
-    setTimeout(() => {
-      // Criar nova notícia (simulada)
-      const newCard = createNewsCard(
-        'Nova Notícia Carregada',
-        'Esta é uma notícia carregada dinamicamente ao clicar em "Carregar mais". O conteúdo é gerado via JavaScript.',
-        '08/10/2026',
-        'tag-secondary',
-        'Geral'
-      );
+  // Adicionar time
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const input = document.getElementById('team-name');
+    const name = input.value.trim();
 
-      newsGrid.appendChild(newCard);
-
-      // Resetar botão
-      this.disabled = false;
-      this.textContent = 'Carregar mais notícias';
-
-      // Anunciar
-      announceToScreenReader('Nova notícia carregada');
-    }, 1000);
+    if (name) {
+      teams.push(name);
+      saveTeams();
+      renderTeams();
+      input.value = '';
+      input.focus();
+      updateDrawInfo();
+    }
   });
 
-  function createNewsCard(title, excerpt, date, tagClass, tagName) {
-    const article = document.createElement('article');
-    article.className = 'news-card';
+  // Limpar lista
+  if (clearTeamsBtn) {
+    clearTeamsBtn.addEventListener('click', function() {
+      if (confirm('Tem certeza que deseja limpar a lista de times?')) {
+        teams = [];
+        saveTeams();
+        renderTeams();
+        updateDrawInfo();
+      }
+    });
+  }
 
-    article.innerHTML = `
-      <div class="news-image">
-        <img src="https://via.placeholder.com/400x250/6b7280/ffffff?text=Nova"
-             alt="Imagem ilustrativa da notícia"
-             width="400"
-             height="250"
-             loading="lazy">
-      </div>
-      <div class="news-content">
-        <span class="tag ${tagClass}">${tagName}</span>
-        <h3 class="news-title">${title}</h3>
-        <p class="news-excerpt">${excerpt}</p>
-        <time class="news-date" datetime="${date}">${date}</time>
-        <button class="btn-favorite" aria-label="Adicionar aos favoritos">
-          <span class="icon-heart" aria-hidden="true"></span>
-        </button>
-      </div>
-    `;
+  function renderTeams() {
+    teamsList.innerHTML = '';
+    teamsCount.textContent = teams.length;
 
-    // Adicionar evento de favorito
-    const favoriteBtn = article.querySelector('.btn-favorite');
-    favoriteBtn.addEventListener('click', function() {
-      // Reutilizar lógica de favoritos
-      const newsIndex = document.querySelectorAll('.news-card').length - 1;
-      const newsId = `news-${newsIndex}`;
-      // Simplificado - em produção, integrar com initFavorites
-      this.classList.toggle('active');
-      const isAdded = this.classList.contains('active');
-      this.setAttribute('aria-label', isAdded ? 'Remover dos favoritos' : 'Adicionar aos favoritos');
+    if (teams.length === 0) {
+      teamsList.innerHTML = '<li class="empty-message" id="empty-teams">Nenhum time adicionado ainda</li>';
+      return;
+    }
+
+    teams.forEach((team, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${team}</span>
+        <button type="button" class="remove-btn" data-index="${index}" aria-label="Remover ${team}">Remover</button>
+      `;
+      teamsList.appendChild(li);
     });
 
-    return article;
+    // Adicionar eventos de remoção
+    teamsList.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const index = parseInt(this.getAttribute('data-index'));
+        teams.splice(index, 1);
+        saveTeams();
+        renderTeams();
+        updateDrawInfo();
+      });
+    });
   }
 
-  function announceToScreenReader(message) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'visually-hidden';
-    announcement.textContent = message;
-    document.body.appendChild(announcement);
+  function saveTeams() {
+    try {
+      localStorage.setItem('fifa-teams', JSON.stringify(teams));
+    } catch (e) {
+      console.warn('Não foi possível salvar times:', e);
+    }
+  }
 
+  function loadTeams() {
+    try {
+      const stored = localStorage.getItem('fifa-teams');
+      if (stored) {
+        teams = JSON.parse(stored);
+        renderTeams();
+        updateDrawInfo();
+      }
+    } catch (e) {
+      console.warn('Não foi possível carregar times:', e);
+    }
+  }
+}
+
+/**
+ * Atualizar informações do sorteio
+ */
+function updateDrawInfo() {
+  const playersCount = document.getElementById('draw-players-count');
+  const teamsCount = document.getElementById('draw-teams-count');
+  const startDrawBtn = document.getElementById('start-draw');
+
+  if (playersCount) playersCount.textContent = players.length;
+  if (teamsCount) teamsCount.textContent = teams.length;
+
+  if (startDrawBtn) {
+    startDrawBtn.disabled = players.length === 0 || teams.length === 0;
+  }
+}
+
+/**
+ * Sorteio de Times
+ */
+function initDraw() {
+  const startDrawBtn = document.getElementById('start-draw');
+  const resetDrawBtn = document.getElementById('reset-draw');
+  const drawStatus = document.getElementById('draw-status');
+
+  if (!startDrawBtn) return;
+
+  // Iniciar sorteio
+  startDrawBtn.addEventListener('click', function() {
+    if (players.length === 0 || teams.length === 0) {
+      alert('É necessário ter pelo menos 1 jogador e 1 time para realizar o sorteio.');
+      return;
+    }
+
+    // Desabilitar botão
+    this.disabled = true;
+    this.textContent = 'Sorteando...';
+
+    // Mostrar status
+    if (drawStatus) {
+      drawStatus.hidden = false;
+      drawStatus.textContent = 'Realizando sorteio...';
+    }
+
+    // Simular tempo de sorteio
     setTimeout(() => {
-      document.body.removeChild(announcement);
-    }, 1000);
+      performDraw();
+      this.disabled = false;
+      this.textContent = 'Iniciar Sorteio';
+
+      if (drawStatus) {
+        drawStatus.textContent = 'Sorteio realizado com sucesso!';
+        setTimeout(() => {
+          drawStatus.hidden = true;
+        }, 3000);
+      }
+
+      // Scroll para resultados
+      document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+    }, 1500);
+  });
+
+  // Reiniciar sorteio
+  if (resetDrawBtn) {
+    resetDrawBtn.addEventListener('click', function() {
+      if (confirm('Tem certeza que deseja reiniciar o sorteio? Os resultados atuais serão perdidos.')) {
+        drawResults = [];
+        renderResults();
+      }
+    });
   }
+
+  function performDraw() {
+    // Embaralhar times
+    const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
+
+    // Distribuir times entre jogadores
+    drawResults = players.map((player, index) => {
+      const teamIndex = index % shuffledTeams.length;
+      return {
+        player: player,
+        team: shuffledTeams[teamIndex]
+      };
+    });
+
+    // Salvar resultados
+    try {
+      localStorage.setItem('fifa-results', JSON.stringify(drawResults));
+    } catch (e) {
+      console.warn('Não foi possível salvar resultados:', e);
+    }
+
+    renderResults();
+  }
+}
+
+/**
+ * Resultados do Sorteio
+ */
+function initResults() {
+  const printBtn = document.getElementById('print-results');
+  const newDrawBtn = document.getElementById('new-draw');
+
+  // Carregar resultados salvos
+  loadResults();
+
+  // Imprimir resultados
+  if (printBtn) {
+    printBtn.addEventListener('click', function() {
+      window.print();
+    });
+  }
+
+  // Novo sorteio
+  if (newDrawBtn) {
+    newDrawBtn.addEventListener('click', function() {
+      if (confirm('Deseja iniciar um novo sorteio? Os dados de jogadores e times serão mantidos.')) {
+        drawResults = [];
+        localStorage.removeItem('fifa-results');
+        renderResults();
+        document.getElementById('sorteio').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  function loadResults() {
+    try {
+      const stored = localStorage.getItem('fifa-results');
+      if (stored) {
+        drawResults = JSON.parse(stored);
+        renderResults();
+      }
+    } catch (e) {
+      console.warn('Não foi possível carregar resultados:', e);
+    }
+  }
+}
+
+/**
+ * Renderizar Resultados
+ */
+function renderResults() {
+  const resultsContainer = document.getElementById('results-container');
+  const emptyResults = document.getElementById('empty-results');
+  const resultsActions = document.getElementById('results-actions');
+
+  if (!resultsContainer) return;
+
+  if (drawResults.length === 0) {
+    resultsContainer.innerHTML = `
+      <div class="empty-message" id="empty-results">
+        <p>Realize o sorteio para ver os resultados</p>
+      </div>
+    `;
+    if (resultsActions) resultsActions.hidden = true;
+    return;
+  }
+
+  resultsContainer.innerHTML = '';
+  if (resultsActions) resultsActions.hidden = false;
+
+  drawResults.forEach((result, index) => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <span class="result-player">${result.player}</span>
+      <span class="result-team">${result.team}</span>
+    `;
+    resultsContainer.appendChild(card);
+  });
 }
 
 /**
  * Smooth Scroll para links âncora
- * Melhoria progressiva
  */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
@@ -504,10 +432,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         block: 'start'
       });
 
-      // Atualizar URL sem scroll
       history.pushState(null, null, targetId);
-
-      // Focar no elemento para acessibilidade
       targetElement.setAttribute('tabindex', '-1');
       targetElement.focus();
     }
@@ -539,7 +464,6 @@ function updateActiveNavLink() {
   });
 }
 
-// Throttle do scroll para performance
 let ticking = false;
 window.addEventListener('scroll', function() {
   if (!ticking) {
@@ -551,9 +475,5 @@ window.addEventListener('scroll', function() {
   }
 });
 
-/**
- * Console log informativo (sem erros no fluxo principal)
- */
-console.log('Portal Esportivo - JavaScript carregado com sucesso');
+console.log('Torneio FIFA - JavaScript carregado com sucesso');
 console.log('Versão: 1.0.0');
-console.log('Acessibilidade: WCAG 2.2 AA');

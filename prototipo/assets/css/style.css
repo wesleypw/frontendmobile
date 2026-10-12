@@ -1197,6 +1197,185 @@ section {
 }
 
 /* ========================================
+   SEÇÕES DO TORNEIO FIFA
+   ======================================== */
+.section-description {
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-lg);
+}
+
+/* Formulários de Jogadores e Times */
+.players-form,
+.teams-form {
+  background-color: var(--color-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.players-list-container,
+.teams-list-container {
+  background-color: var(--color-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.players-list-container h3,
+.teams-list-container h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-gray-800);
+}
+
+.players-list,
+.teams-list {
+  list-style: none;
+  margin-bottom: var(--spacing-lg);
+  min-height: 100px;
+}
+
+.players-list li,
+.teams-list li {
+  padding: var(--spacing-md);
+  border-bottom: var(--border-width-thin) solid var(--color-gray-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.players-list li:last-child,
+.teams-list li:last-child {
+  border-bottom: none;
+}
+
+.empty-message {
+  color: var(--color-gray-500);
+  font-style: italic;
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+
+.remove-btn {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  transition: background-color var(--transition-fast);
+}
+
+.remove-btn:hover,
+.remove-btn:focus {
+  background-color: #dc2626;
+}
+
+/* Seção de Sorteio */
+.draw-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.info-card {
+  background-color: var(--color-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.info-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-sm);
+}
+
+.info-value {
+  display: block;
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.draw-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 576px) {
+  .draw-controls {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.draw-status {
+  background-color: var(--color-info);
+  color: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  font-weight: 600;
+  margin-top: var(--spacing-lg);
+}
+
+/* Seção de Resultados */
+.results-container {
+  background-color: var(--color-white);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.result-card {
+  background-color: var(--color-gray-50);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+  border-left: var(--border-width-thick) solid var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.result-player {
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-800);
+}
+
+.result-team {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.results-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 576px) {
+  .results-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* ========================================
    RESPONSIVIDADE
    ======================================== */
 @media (max-width: 375px) {
@@ -1204,25 +1383,18 @@ section {
     --font-size-4xl: clamp(2rem, 1.8rem + 2vw, 2.5rem);
   }
 
-  .match-teams {
+  .result-card {
     flex-direction: column;
-  }
-
-  .team {
-    flex-direction: row;
-    justify-content: center;
+    text-align: center;
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .news-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .featured-card {
-    grid-template-columns: 1.5fr 1fr;
+@media (min-width: 576px) {
+  .players-form,
+  .teams-form {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -1233,10 +1405,12 @@ section {
   .skip-link,
   .menu-toggle,
   .main-nav,
-  .gallery-controls,
-  .btn-favorite,
-  .search-box,
-  .calendar-filters {
+  .draw-controls,
+  .results-actions,
+  .remove-btn,
+  .players-form,
+  .teams-form,
+  .draw-info {
     display: none !important;
   }
 
@@ -1249,7 +1423,23 @@ section {
     box-shadow: none;
   }
 
-  section {
+  .section-jogadores,
+  .section-times,
+  .section-sorteio {
+    display: none !important;
+  }
+
+  .section-resultados {
+    display: block !important;
+  }
+
+  .results-container {
+    box-shadow: none;
+    border: 1px solid var(--color-gray-300);
+  }
+
+  .result-card {
+    border: 1px solid var(--color-gray-200);
     page-break-inside: avoid;
   }
 }
