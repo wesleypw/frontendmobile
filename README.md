@@ -47,7 +47,7 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 
 ## Tecnologias
 
-- **HTML5:** Semântico, acessível
+- **HTML5:** Semântico, acessível, imagens responsivas (srcset/sizes)
 - **CSS3:** Custom properties, Bootstrap 5.3.3, responsivo
 - **JavaScript ES6+:** Nativo, Bootstrap JS bundle
 - **Bootstrap 5.3.3:** Grid, componentes mobile, utilities
@@ -67,6 +67,7 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 - ✅ Container queries
 - ✅ Pointer Events (gestos)
 - ✅ Delegação de eventos
+- ✅ Imagens responsivas (srcset/sizes, lazy loading)
 
 ## Progresso do Projeto
 
@@ -91,6 +92,28 @@ Baseado no PROJETO-UC15-HTML-MOBILE-FIRST.md:
 - **Cards:** Jogos
 - **Forms:** Formulário de contato com validação
 - **Utilities:** Sombras, espaçamento, flexbox
+
+### Performance de Imagens
+
+Todas as imagens implementam:
+- **srcset/sizes:** Múltiplas resoluções para diferentes viewports
+- **width/height:** Dimensões explícitas para prevenir CLS
+- **lazy loading:** Carregamento diferido para imagens abaixo do fold
+- **eager loading:** Carregamento imediato para imagens críticas (destaque)
+
+**Exemplo:**
+```html
+<img src="https://via.placeholder.com/800x400/1e40af/ffffff?text=Jogo+da+Final"
+     srcset="https://via.placeholder.com/400x200/1e40af/ffffff?text=Jogo+da+Final 400w,
+             https://via.placeholder.com/800x400/1e40af/ffffff?text=Jogo+da+Final 800w,
+             https://via.placeholder.com/1200x600/1e40af/ffffff?text=Jogo+da+Final 1200w"
+     sizes="(max-width: 576px) 100vw,
+            (max-width: 768px) 50vw,
+            50vw"
+     width="800"
+     height="400"
+     loading="eager">
+```
 
 ### Customização
 

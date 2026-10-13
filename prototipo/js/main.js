@@ -237,19 +237,19 @@ function initDynamicListDelegation() {
         </div>
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
           <div class="text-center">
-            <img src="https://via.placeholder.com/60x60/6b7280/ffffff?text=DYN"
-                 class="rounded-circle mb-2" alt="Escudo Time Dinâmico"
+              <img src="img/escudo-centro.svg"
+                width="60" height="60" class="team-crest mb-2" alt="Escudo do Aurora Central"
                  loading="lazy">
-            <div class="fw-bold small">Time ${id}</div>
+            <div class="fw-bold small">Aurora Central</div>
           </div>
           <div class="text-center">
             <div class="display-6 fw-bold text-muted">VS</div>
           </div>
           <div class="text-center">
-            <img src="https://via.placeholder.com/60x60/8b5cf6/ffffff?text=ADV"
-                 class="rounded-circle mb-2" alt="Escudo Adversário"
+              <img src="img/escudo-norte.svg"
+                 width="60" height="60" class="team-crest mb-2" alt="Escudo dos Falcões do Norte"
                  loading="lazy">
-            <div class="fw-bold small">Adversário</div>
+            <div class="fw-bold small">Falcões</div>
           </div>
         </div>
         <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top flex-wrap gap-2">

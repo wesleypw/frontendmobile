@@ -195,9 +195,16 @@
   }
 }
 
-.match-card img {
+.match-card .team-crest {
   width: 60px;
   height: 60px;
+  object-fit: contain;
+}
+
+.standings-table .team-crest {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
 /* ========================================

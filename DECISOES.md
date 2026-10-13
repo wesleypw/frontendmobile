@@ -235,11 +235,55 @@ Este documento registra as decisões técnicas tomadas durante o desenvolvimento
 **Justificativa:** CSS é render-blocking e necessário para evitar FOUC. JS não bloqueia renderização.
 
 ### Lazy Loading
-**Decisão:** Usar `loading="lazy"` em imagens abaixo do fold
+**Decisão:** Usar `loading="lazy"` em imagens abaixo do fold e `loading="eager"` em imagens críticas
 ```html
+<!-- Imagem crítica (above the fold) -->
+<img loading="eager">
+
+<!-- Imagem não crítica (below the fold) -->
 <img loading="lazy">
 ```
-**Justificativa:** Carrega imagens apenas quando necessário, melhorando LCP.
+**Justificativa:** Carrega imagens apenas quando necessário, melhorando LCP. Imagens críticas (destaque) carregam imediatamente para evitar CLS.
+
+### Imagens Responsivas com srcset e sizes
+**Decisão:** Implementar `srcset` e `sizes` em todas as imagens para responsividade
+```html
+<!-- Imagem de destaque -->
+<img src="https://via.placeholder.com/800x400/1e40af/ffffff?text=Jogo+da+Final"
+     srcset="https://via.placeholder.com/400x200/1e40af/ffffff?text=Jogo+da+Final 400w,
+             https://via.placeholder.com/800x400/1e40af/ffffff?text=Jogo+da+Final 800w,
+             https://via.placeholder.com/1200x600/1e40af/ffffff?text=Jogo+da+Final 1200w"
+     sizes="(max-width: 576px) 100vw,
+            (max-width: 768px) 50vw,
+            50vw"
+     width="800"
+     height="400">
+
+<!-- Escudos de times (tamanho fixo) -->
+<img src="https://via.placeholder.com/60x60/1e40af/ffffff?text=TEC"
+     srcset="https://via.placeholder.com/30x30/1e40af/ffffff?text=TEC 30w,
+             https://via.placeholder.com/60x60/1e40af/ffffff?text=TEC 60w,
+             https://via.placeholder.com/90x90/1e40af/ffffff?text=TEC 90w"
+     sizes="60px"
+     width="60"
+     height="60">
+```
+**Justificativa:**
+- **srcset:** Fornece múltiplas resoluções da mesma imagem, permitindo que o navegador escolha a adequada
+- **sizes:** Define como a imagem será exibida em diferentes breakpoints
+- **width/height:** Dimensões explícitas previnem CLS (Cumulative Layout Shift)
+- **T05 compliance:** Atende ao requisito de "Entregar imagens com dimensões, srcset/sizes ou <picture> quando aplicável"
+
+**Benefícios:**
+- Reduz uso de dados em dispositivos móveis (carrega versões menores)
+- Melhora LCP (Largest Contentful Paint)
+- Elimina CLS causado por carregamento de imagens
+- Melhora experiência em conexões lentas
+
+**Custo:**
+- Aumento do tamanho do HTML (mais atributos)
+- Requer múltiplas versões de cada imagem (no caso de imagens reais)
+- Placeholder.com usado no protótipo (em produção, usariamos versões reais otimizadas)
 
 ## WordPress
 
@@ -258,3 +302,4 @@ Este documento registra as decisões técnicas tomadas durante o desenvolvimento
 | 2026-10-14 | Delegação de eventos em lista dinâmica | Melhor performance para itens criados dinamicamente |
 | 2026-10-14 | Pointer Events para gestos | Swipe em cards de jogos com feedback visual |
 | 2026-10-14 | jQuery 4.0 para interações específicas | Demonstração de conhecimento da biblioteca |
+| 2026-10-15 | Organização de imagens com srcset/sizes | Compliance T05, melhoria de performance (LCP, CLS), redução de dados em mobile |

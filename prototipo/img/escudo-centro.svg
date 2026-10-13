@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 112" role="img" aria-labelledby="title">
+  <title id="title">Escudo do Aurora Central</title>
+  <path fill="#1e40af" d="M5 5h90v55c0 22-19 39-45 47C24 99 5 82 5 60z"/>
+  <path fill="#fff" d="M43 18h14v19h19v14H57v27H43V51H24V37h19z"/>
+  <path fill="#fbbf24" d="M10 10h80v8H10z"/>
+  <path fill="none" stroke="#fff" stroke-width="3" d="M13 25v34c0 18 15 32 37 40 22-8 37-22 37-40V25"/>
+</svg>
