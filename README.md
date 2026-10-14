@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido apenas com HTML, CSS e JavaScript puro.
+Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HTML, CSS, JavaScript puro e Bootstrap 5.3.
 
 ## Público-Alvo
 
@@ -25,33 +25,57 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido apenas
 ├─ DECISOES.md                 # Registro de decisões técnicas
 ├─ TESTES.md                   # Plano de testes manuais
 ├─ CMS.md                      # Documentação WordPress (futuro)
+├─ PROJETO-UC15-HTML-MOBILE-FIRST.md  # README original
 ├─ prototipo/
-│  ├─ index.html               # Página principal
+│  ├─ index.html               # Página principal (Bootstrap 5.3)
 │  ├─ assets/
 │  │  └─ css/
-│  │     └─ style.css          # CSS completo
+│  │     └─ style.css          # CSS custom + customização Bootstrap
 │  └─ js/
-│     └─ main.js               # JavaScript
-└─ wordpress/
-   └─ tema-filho/              # Estrutura para tema filho
+│     └─ main.js               # JavaScript (integração Bootstrap)
+├─ wordpress/
+│  └─ tema-filho/              # Estrutura para tema filho
+└─ docs/
+   └─ evidencias/              # Diretório para evidências
 ```
 
 ## Tecnologias
 
 - **HTML5:** Semântico, acessível
-- **CSS3:** Custom properties, Flexbox, Grid, responsivo
-- **JavaScript ES6+:** Nativo, sem frameworks
+- **CSS3:** Custom properties, Bootstrap 5.3.3, responsivo
+- **JavaScript ES6+:** Nativo, Bootstrap JS bundle
+- **Bootstrap 5.3.3:** Grid, componentes mobile, utilities
 
 ## Funcionalidades
 
 - ✅ Home com destaque
-- ✅ Notícias com busca e favoritos
 - ✅ Calendário de jogos
 - ✅ Classificação
-- ✅ Galeria de fotos
-- ✅ Formulário de contato
-- ✅ Responsivo (mobile-first)
+- ✅ Formulário de contato (Bootstrap validation)
+- ✅ Menu mobile (Bootstrap Navbar)
+- ✅ Responsivo (Bootstrap breakpoints)
 - ✅ Acessível (WCAG 2.2)
+
+## Bootstrap 5.3 - Integração
+
+### Componentes Utilizados
+
+- **Grid System:** Layout responsivo com container, row, col
+- **Navbar:** Menu mobile com collapse
+- **Cards:** Notícias e jogos
+- **Carousel:** Galeria de fotos
+- **Forms:** Formulário de contato com validação
+- **Utilities:** Sombras, espaçamento, flexbox
+
+### Customização
+
+- Variáveis Bootstrap sobrescritas em `:root`
+- CSS custom adicional para funcionalidades específicas
+- Manutenção de paleta de cores original
+
+### Versão
+
+Bootstrap 5.3.3 via CDN com SRI (Subresource Integrity)
 
 ## Conteúdo Fictício
 

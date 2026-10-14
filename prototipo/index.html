@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sorteador de times para torneio de FIFA. Cadastre jogadores, escolha os times e faça o sorteio.">
-  <title>Torneio FIFA - Sorteador de Times</title>
+  <meta name="description" content="Portal mobile-first para acompanhar a temporada esportiva. Calendário e classificação em tempo real.">
+  <title>Portal Esportivo - Temporada 2026</title>
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+
+  <!-- CSS Custom -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -12,129 +19,404 @@
   <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
 
   <!-- Header / Banner -->
-  <header role="banner" class="site-header">
+  <header class="site-header bg-primary text-white sticky-top">
     <div class="container">
-      <div class="header-content">
-        <h1 class="site-title">
-          <a href="/">Torneio FIFA</a>
+      <div class="d-flex justify-content-between align-items-center py-3">
+        <h1 class="site-title h3 mb-0">
+          <a href="/" class="text-white text-decoration-none">Portal Esportivo</a>
         </h1>
-        <button class="menu-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Abrir menu">
-          <span class="hamburger"></span>
-          <span class="hamburger"></span>
-          <span class="hamburger"></span>
+        <button class="navbar-toggler d-md-none border-0" type="button"
+                data-bs-toggle="collapse" data-bs-target="#primary-menu"
+                aria-expanded="false" aria-controls="primary-menu" aria-label="Abrir menu">
+          <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Navegação Principal -->
-  <nav role="navigation" aria-label="Navegação principal" class="main-nav" id="primary-menu">
+  <!-- Navegação Principal - Bootstrap Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary-dark" id="primary-menu">
     <div class="container">
-      <ul class="nav-list">
-        <li><a href="#jogadores" class="nav-link active">Jogadores</a></li>
-        <li><a href="#times" class="nav-link">Times</a></li>
-        <li><a href="#sorteio" class="nav-link">Sorteio</a></li>
-        <li><a href="#resultados" class="nav-link">Resultados</a></li>
-      </ul>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#calendario">Calendário</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#classificacao">Classificação</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contato">Contato</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
   <!-- Conteúdo Principal -->
-  <main role="main" id="main-content" class="site-main">
+  <main role="main" id="main-content" class="site-main py-5">
     <div class="container">
 
-      <!-- Seção Jogadores -->
-      <section aria-labelledby="heading-jogadores" class="section-jogadores" id="jogadores">
-        <h2 id="heading-jogadores" class="section-title">Cadastro de Jogadores</h2>
-        <p class="section-description">Adicione os participantes do torneio de FIFA</p>
-
-        <form class="players-form" id="players-form" novalidate>
-          <div class="form-group">
-            <label for="player-name">Nome do jogador <span class="required" aria-label="obrigatório">*</span></label>
-            <input type="text" id="player-name" name="player-name" required aria-required="true"
-                   aria-describedby="player-name-error" placeholder="Digite o nome do jogador">
-            <span class="error-message" id="player-name-error" role="alert"></span>
+      <!-- Seção Destaque -->
+      <section aria-labelledby="heading-destaque" class="section-destaque mb-5">
+        <h2 id="heading-destaque" class="section-title mb-4">Destaque</h2>
+        <div class="card shadow-lg">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img src="https://via.placeholder.com/800x400/1e40af/ffffff?text=Jogo+da+Final"
+                   class="img-fluid rounded-start h-100 object-fit-cover"
+                   alt="Estádio lotado para a final do campeonato"
+                   loading="eager">
+            </div>
+            <div class="col-md-6">
+              <div class="card-body d-flex flex-column justify-content-center p-4">
+                <span class="badge bg-primary align-self-start mb-3">Final</span>
+                <h3 class="card-title h2">Grande Decisão: Título Definido neste Domingo</h3>
+                <p class="card-text text-muted">
+                  As duas melhores equipes da temporada se enfrentam na grande final.
+                  Confira tudo sobre o jogo, horários e onde assistir.
+                </p>
+                <a href="#" class="btn btn-primary align-self-start">Ler matéria completa</a>
+              </div>
+            </div>
           </div>
-
-          <button type="submit" class="btn btn-primary">Adicionar Jogador</button>
-        </form>
-
-        <div class="players-list-container">
-          <h3>Jogadores Cadastrados (<span id="players-count">0</span>)</h3>
-          <ul class="players-list" id="players-list" role="list">
-            <li class="empty-message" id="empty-players">Nenhum jogador cadastrado ainda</li>
-          </ul>
-          <button type="button" class="btn btn-outline" id="clear-players">Limpar Lista</button>
         </div>
       </section>
 
-      <!-- Seção Times -->
-      <section aria-labelledby="heading-times" class="section-times" id="times">
-        <h2 id="heading-times" class="section-title">Seleção de Times</h2>
-        <p class="section-description">Escolha os times que estarão disponíveis para o sorteio</p>
+      <!-- Seção Calendário -->
+      <section aria-labelledby="heading-calendario" class="section-calendario mb-5" id="calendario">
+        <h2 id="heading-calendario" class="section-title mb-4">Calendário de Jogos</h2>
 
-        <form class="teams-form" id="teams-form" novalidate>
-          <div class="form-group">
-            <label for="team-name">Nome do time <span class="required" aria-label="obrigatório">*</span></label>
-            <input type="text" id="team-name" name="team-name" required aria-required="true"
-                   aria-describedby="team-name-error" placeholder="Digite o nome do time">
-            <span class="error-message" id="team-name-error" role="alert"></span>
-          </div>
+        <div class="mb-4">
+          <label for="filter-round" class="form-label visually-hidden">Filtrar por rodada</label>
+          <select id="filter-round" class="form-select w-auto">
+            <option value="all">Todas as rodadas</option>
+            <option value="38" selected>Rodada 38 (Final)</option>
+            <option value="37">Rodada 37</option>
+            <option value="36">Rodada 36</option>
+          </select>
+        </div>
 
-          <button type="submit" class="btn btn-primary">Adicionar Time</button>
-        </form>
+        <div class="matches-list d-flex flex-column gap-3">
+          <article class="card shadow match-card border-start border-4 border-danger">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <span class="badge bg-danger">Ao vivo</span>
+                <time class="text-muted small" datetime="2026-10-08T16:00">Hoje, 16:00</time>
+              </div>
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div class="text-center">
+                  <img src="https://via.placeholder.com/60x60/1e40af/ffffff?text=TEC"
+                       class="rounded-circle mb-2" alt="Escudo do Time do Centro"
+                       loading="lazy">
+                  <div class="fw-bold small">Time do Centro</div>
+                </div>
+                <div class="text-center">
+                  <div class="display-6 fw-bold text-primary">2 - 1</div>
+                  <div class="text-muted small">2º tempo</div>
+                </div>
+                <div class="text-center">
+                  <img src="https://via.placeholder.com/60x60/dc2626/ffffff?text=TLN"
+                       class="rounded-circle mb-2" alt="Escudo do Time do Leste"
+                       loading="lazy">
+                  <div class="fw-bold small">Time do Leste</div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top flex-wrap gap-2">
+                <span class="text-muted small">Estádio Nacional</span>
+                <a href="#" class="btn btn-sm btn-primary">Assistir</a>
+              </div>
+            </div>
+          </article>
 
-        <div class="teams-list-container">
-          <h3>Times Disponíveis (<span id="teams-count">0</span>)</h3>
-          <ul class="teams-list" id="teams-list" role="list">
-            <li class="empty-message" id="empty-teams">Nenhum time adicionado ainda</li>
-          </ul>
-          <button type="button" class="btn btn-outline" id="clear-teams">Limpar Lista</button>
+          <article class="card shadow match-card border-start border-4 border-info">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <span class="badge bg-info">Agendado</span>
+                <time class="text-muted small" datetime="2026-10-11T19:00">Sábado, 19:00</time>
+              </div>
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div class="text-center">
+                  <img src="https://via.placeholder.com/60x60/059669/ffffff?text=TN"
+                       class="rounded-circle mb-2" alt="Escudo do Time do Norte"
+                       loading="lazy">
+                  <div class="fw-bold small">Time do Norte</div>
+                </div>
+                <div class="text-center">
+                  <div class="display-6 fw-bold text-muted">VS</div>
+                </div>
+                <div class="text-center">
+                  <img src="https://via.placeholder.com/60x60/7c3aed/ffffff?text=TS"
+                       class="rounded-circle mb-2" alt="Escudo do Time do Sul"
+                       loading="lazy">
+                  <div class="fw-bold small">Time do Sul</div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top flex-wrap gap-2">
+                <span class="text-muted small">Arena do Norte</span>
+                <a href="#" class="btn btn-sm btn-outline-primary">Detalhes</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card shadow match-card border-start border-4 border-secondary">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <span class="badge bg-secondary">Finalizado</span>
+                <time class="text-muted small" datetime="2026-10-04T15:30">04/10, 15:30</time>
+              </div>
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div class="text-center">
+                  <img src="https://via.placeholder.com/60x60/d97706/ffffff?text=TO"
+                       class="rounded-circle mb-2" alt="Escudo do Time do Oeste"
+                       loading="lazy">
+                  <div class="fw-bold small">Time do Oeste</div>
+                </div>
+                <div class="text-center">
+                  <div class="display-6 fw-bold text-primary">1 - 0</div>
+                </div>
+                <div class="text-center">
+                  <img src="https://via.placeholder.com/60x60/0891b2/ffffff?text=TE"
+                       class="rounded-circle mb-2" alt="Escudo do Time do Leste"
+                       loading="lazy">
+                  <div class="fw-bold small">Time do Leste</div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top flex-wrap gap-2">
+                <span class="text-muted small">Estádio do Oeste</span>
+                <a href="#" class="btn btn-sm btn-outline-primary">Resumo</a>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
-      <!-- Seção Sorteio -->
-      <section aria-labelledby="heading-sorteio" class="section-sorteio" id="sorteio">
-        <h2 id="heading-sorteio" class="section-title">Sorteio de Times</h2>
-        <p class="section-description">Realize o sorteio para distribuir os times entre os jogadores</p>
+      <!-- Seção Classificação -->
+      <section aria-labelledby="heading-classificacao" class="section-classificacao mb-5" id="classificacao">
+        <h2 id="heading-classificacao" class="section-title mb-4">Classificação</h2>
 
-        <div class="draw-info">
-          <div class="info-card">
-            <span class="info-label">Jogadores:</span>
-            <span class="info-value" id="draw-players-count">0</span>
-          </div>
-          <div class="info-card">
-            <span class="info-label">Times:</span>
-            <span class="info-value" id="draw-teams-count">0</span>
-          </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered standings-table shadow">
+            <caption class="text-muted small mb-2">Classificação geral do campeonato</caption>
+            <thead class="table-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Time</th>
+                <th scope="col">P</th>
+                <th scope="col">J</th>
+                <th scope="col">V</th>
+                <th scope="col">E</th>
+                <th scope="col">D</th>
+                <th scope="col">GP</th>
+                <th scope="col">GC</th>
+                <th scope="col">SG</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-success">
+                <td>1</td>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <img src="https://via.placeholder.com/30x30/1e40af/ffffff?text=TEC"
+                         class="rounded-circle" alt="" loading="lazy">
+                    Time do Centro
+                  </div>
+                </td>
+                <td>78</td>
+                <td>38</td>
+                <td>24</td>
+                <td>6</td>
+                <td>8</td>
+                <td>72</td>
+                <td>32</td>
+                <td>+40</td>
+              </tr>
+              <tr class="table-primary">
+                <td>2</td>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <img src="https://via.placeholder.com/30x30/dc2626/ffffff?text=TLN"
+                         class="rounded-circle" alt="" loading="lazy">
+                    Time do Leste
+                  </div>
+                </td>
+                <td>75</td>
+                <td>38</td>
+                <td>23</td>
+                <td>6</td>
+                <td>9</td>
+                <td>68</td>
+                <td>35</td>
+                <td>+33</td>
+              </tr>
+              <tr class="table-primary">
+                <td>3</td>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <img src="https://via.placeholder.com/30x30/059669/ffffff?text=TN"
+                         class="rounded-circle" alt="" loading="lazy">
+                    Time do Norte
+                  </div>
+                </td>
+                <td>70</td>
+                <td>38</td>
+                <td>21</td>
+                <td>7</td>
+                <td>10</td>
+                <td>65</td>
+                <td>38</td>
+                <td>+27</td>
+              </tr>
+              <tr class="table-warning">
+                <td>4</td>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <img src="https://via.placeholder.com/30x30/7c3aed/ffffff?text=TS"
+                         class="rounded-circle" alt="" loading="lazy">
+                    Time do Sul
+                  </div>
+                </td>
+                <td>65</td>
+                <td>38</td>
+                <td>19</td>
+                <td>8</td>
+                <td>11</td>
+                <td>58</td>
+                <td>40</td>
+                <td>+18</td>
+              </tr>
+              <tr class="table-warning">
+                <td>5</td>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <img src="https://via.placeholder.com/30x30/d97706/ffffff?text=TO"
+                         class="rounded-circle" alt="" loading="lazy">
+                    Time do Oeste
+                  </div>
+                </td>
+                <td>62</td>
+                <td>38</td>
+                <td>18</td>
+                <td>8</td>
+                <td>12</td>
+                <td>55</td>
+                <td>42</td>
+                <td>+13</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <div class="draw-controls">
-          <button type="button" class="btn btn-primary btn-lg" id="start-draw" disabled>
-            Iniciar Sorteio
-          </button>
-          <button type="button" class="btn btn-outline" id="reset-draw">
-            Reiniciar Sorteio
-          </button>
+        <div class="d-flex flex-wrap gap-3 mt-3 p-3 bg-light rounded">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge rounded-pill bg-success"></span>
+            <small>Campeão</small>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge rounded-pill bg-primary"></span>
+            <small>Libertadores</small>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge rounded-pill bg-warning text-dark"></span>
+            <small>Sul-Americana</small>
+          </div>
         </div>
-
-        <div class="draw-status" id="draw-status" role="status" aria-live="polite" hidden></div>
       </section>
 
-      <!-- Seção Resultados -->
-      <section aria-labelledby="heading-resultados" class="section-resultados" id="resultados">
-        <h2 id="heading-resultados" class="section-title">Resultados do Sorteio</h2>
-        <p class="section-description">Veja quais times cada jogador recebeu</p>
+      <!-- Seção Contato/Formulário -->
+      <section aria-labelledby="heading-contato" class="section-contato mb-5" id="contato">
+        <h2 id="heading-contato" class="section-title mb-4">Entre em Contato</h2>
 
-        <div class="results-container" id="results-container">
-          <div class="empty-message" id="empty-results">
-            <p>Realize o sorteio para ver os resultados</p>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 shadow">
+              <div class="card-body">
+                <h3 class="h5 mb-3">Informações</h3>
+                <p class="text-muted">Envie suas dúvidas, sugestões ou reporte problemas através do formulário.</p>
+                <address class="text-muted mb-0">
+                  <p class="mb-2"><strong>Email:</strong> contato@portalesportivo.com</p>
+                  <p class="mb-2"><strong>Telefone:</strong> (11) 1234-5678</p>
+                  <p class="mb-0"><strong>Endereço:</strong> Rua do Esporte, 123 - São Paulo, SP</p>
+                </address>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="results-actions" id="results-actions" hidden>
-          <button type="button" class="btn btn-primary" id="print-results">Imprimir Resultados</button>
-          <button type="button" class="btn btn-outline" id="new-draw">Novo Sorteio</button>
+          <div class="col-md-8">
+            <div class="card shadow">
+              <div class="card-body p-4">
+                <form class="contact-form" id="contact-form" novalidate>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="name" class="form-label">
+                        Nome completo <span class="text-danger">*</span>
+                      </label>
+                      <input type="text" id="name" name="name" class="form-control" required
+                             aria-describedby="name-error">
+                      <div class="invalid-feedback" id="name-error"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">
+                        Email <span class="text-danger">*</span>
+                      </label>
+                      <input type="email" id="email" name="email" class="form-control" required
+                             aria-describedby="email-error">
+                      <div class="invalid-feedback" id="email-error"></div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="subject" class="form-label">
+                        Assunto <span class="text-danger">*</span>
+                      </label>
+                      <select id="subject" name="subject" class="form-select" required
+                              aria-describedby="subject-error">
+                        <option value="">Selecione um assunto</option>
+                        <option value="duvida">Dúvida</option>
+                        <option value="sugestao">Sugestão</option>
+                        <option value="problema">Reportar problema</option>
+                        <option value="outro">Outro</option>
+                      </select>
+                      <div class="invalid-feedback" id="subject-error"></div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="message" class="form-label">
+                        Mensagem <span class="text-danger">*</span>
+                      </label>
+                      <textarea id="message" name="message" class="form-control" rows="5" required
+                                aria-describedby="message-error"></textarea>
+                      <div class="invalid-feedback" id="message-error"></div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input type="checkbox" id="consent" name="consent" class="form-check-input" required
+                               aria-describedby="consent-error">
+                        <label for="consent" class="form-check-label">
+                          Concordo com o processamento dos meus dados para contato <span class="text-danger">*</span>
+                        </label>
+                        <div class="invalid-feedback" id="consent-error"></div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary btn-lg w-100">Enviar mensagem</button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="alert alert-success mt-4 d-none" id="form-success" role="alert">
+                  <h4 class="alert-heading">Mensagem enviada com sucesso!</h4>
+                  <p class="mb-0">Entraremos em contato em breve.</p>
+                  <button type="button" class="btn btn-outline-light mt-3" id="form-reset">Enviar outra mensagem</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -142,43 +424,49 @@
   </main>
 
   <!-- Footer / Contentinfo -->
-  <footer role="contentinfo" class="site-footer">
+  <footer class="site-footer bg-dark text-white py-5">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Sobre</h3>
-          <p>Sorteador de times para torneios de FIFA. Organize seus campeonatos de forma justa e divertida.</p>
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <h3 class="h5 mb-3">Sobre</h3>
+          <p class="text-white-50 small">
+            Portal esportivo dedicado a acompanhar a temporada 2026 com calendário e classificação em tempo real.
+          </p>
         </div>
-        <div class="footer-section">
-          <h3>Links Rápidos</h3>
+        <div class="col-md-4">
+          <h3 class="h5 mb-3">Links Rápidos</h3>
           <nav aria-label="Links do rodapé">
-            <ul class="footer-links">
-              <li><a href="#jogadores">Jogadores</a></li>
-              <li><a href="#times">Times</a></li>
-              <li><a href="#sorteio">Sorteio</a></li>
-              <li><a href="#resultados">Resultados</a></li>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#calendario" class="text-white-50 text-decoration-none">Calendário</a></li>
+              <li class="mb-2"><a href="#classificacao" class="text-white-50 text-decoration-none">Classificação</a></li>
+              <li class="mb-2"><a href="#contato" class="text-white-50 text-decoration-none">Contato</a></li>
             </ul>
           </nav>
         </div>
-        <div class="footer-section">
-          <h3>Legal</h3>
+        <div class="col-md-4">
+          <h3 class="h5 mb-3">Legal</h3>
           <nav aria-label="Links legais">
-            <ul class="footer-links">
-              <li><a href="#">Termos de uso</a></li>
-              <li><a href="#">Política de privacidade</a></li>
-              <li><a href="#">Cookies</a></li>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Termos de uso</a></li>
+              <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Política de privacidade</a></li>
+              <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none">Cookies</a></li>
             </ul>
           </nav>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Torneio FIFA. Todos os direitos reservados.</p>
-        <p class="disclaimer">Aplicativo para fins de entretenimento.</p>
+      <div class="border-top border-secondary pt-4 text-center">
+        <p class="text-white-50 small mb-1">&copy; 2026 Portal Esportivo. Todos os direitos reservados.</p>
+        <p class="text-white-50 small fst-italic">Conteúdo fictício para fins educacionais.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Bootstrap 5.3.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaA55EBRGfKrQW3NjN9qS6fN8T8f0f3F3"
+          crossorigin="anonymous"></script>
+
+  <!-- JS Custom -->
   <script src="js/main.js" defer></script>
 </body>
 </html>
