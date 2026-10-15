@@ -28,6 +28,16 @@
   /* Tipografia - Sistema nativo */
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
+  /* Tipografia Fluida - clamp() para escalabilidade suave */
+  --font-fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --font-fluid-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --font-fluid-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --font-fluid-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --font-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --font-fluid-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --font-fluid-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.5rem);
+  --font-fluid-4xl: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+
   /* Bordas */
   --bs-border-radius: 0.5rem;
   --bs-border-radius-lg: 0.75rem;
@@ -96,11 +106,13 @@
   color: #111827;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid #e5e7eb;
+  font-size: var(--font-fluid-3xl);
 }
 
 .section-description {
   color: #6b7280;
   margin-bottom: 1.5rem;
+  font-size: var(--font-fluid-base);
 }
 
 /* ========================================
@@ -141,8 +153,27 @@
    CALENDÁRIO
    ======================================== */
 
+/* Container Query para cards de jogo */
+.match-container {
+  container-type: inline-size;
+  container-name: match-card;
+}
+
 .match-card {
   transition: border-color 0.15s ease-in-out;
+}
+
+/* Ajustes baseados no tamanho do container */
+@container match-card (min-width: 400px) {
+  .match-card .match-teams {
+    flex-direction: row;
+  }
+}
+
+@container match-card (min-width: 600px) {
+  .match-card .match-score {
+    font-size: 2.5rem;
+  }
 }
 
 .match-card.border-danger {

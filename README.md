@@ -46,6 +46,8 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 - **JavaScript ES6+:** Nativo, Bootstrap JS bundle
 - **Bootstrap 5.3.3:** Grid, componentes mobile, utilities
 
+> **NOTA:** Projeto limitado a HTML, CSS e JavaScript puro. Sem jQuery, sem testes automatizados, sem ferramentas de build.
+
 ## Funcionalidades
 
 - ✅ Home com destaque

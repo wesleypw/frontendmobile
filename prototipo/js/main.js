@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initContactForm();
   initSmoothScroll();
   initActiveNavLink();
+  initDynamicListDelegation();
+  initPointerEvents();
 });
 
 /**
@@ -187,3 +189,199 @@ console.log('Portal Esportivo - JavaScript carregado com sucesso');
 console.log('Versão: 1.0.0');
 console.log('Bootstrap: 5.3.3');
 console.log('Acessibilidade: WCAG 2.2 AA');
+
+/**
+ * Delegação em Lista Dinâmica (T07)
+ * Demonstração de event delegation para itens criados dinamicamente
+ */
+function initDynamicListDelegation() {
+  const addMatchBtn = document.getElementById('add-match');
+  const matchesList = document.querySelector('.matches-list');
+
+  if (!addMatchBtn || !matchesList) return;
+
+  let matchCount = 0;
+
+  // Delegação de evento no container pai
+  matchesList.addEventListener('click', function(e) {
+    // Verificar se o clique foi em um botão de detalhes
+    const detailsBtn = e.target.closest('.btn-details-match');
+    if (detailsBtn) {
+      const matchCard = detailsBtn.closest('.match-card');
+      const matchId = matchCard.dataset.matchId;
+      console.log(`Detalhes do jogo ${matchId} clicado (via delegação)`);
+      announceToScreenReader(`Detalhes do jogo ${matchId} exibidos`);
+    }
+  });
+
+  // Adicionar novo jogo dinamicamente
+  addMatchBtn.addEventListener('click', function() {
+    matchCount++;
+    const newMatch = createMatchCard(matchCount);
+    matchesList.appendChild(newMatch);
+
+    // Anunciar para leitores de tela
+    announceToScreenReader(`Novo jogo adicionado: Rodada ${matchCount}`);
+  });
+
+  function createMatchCard(id) {
+    const article = document.createElement('article');
+    article.className = 'card shadow match-card border-start border-4 border-info match-container';
+    article.dataset.matchId = id;
+
+    article.innerHTML = `
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <span class="badge bg-info">Agendado</span>
+          <time class="text-muted small">Próximo domingo, 16:00</time>
+        </div>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div class="text-center">
+            <img src="https://via.placeholder.com/60x60/6b7280/ffffff?text=DYN"
+                 class="rounded-circle mb-2" alt="Escudo Time Dinâmico"
+                 loading="lazy">
+            <div class="fw-bold small">Time ${id}</div>
+          </div>
+          <div class="text-center">
+            <div class="display-6 fw-bold text-muted">VS</div>
+          </div>
+          <div class="text-center">
+            <img src="https://via.placeholder.com/60x60/8b5cf6/ffffff?text=ADV"
+                 class="rounded-circle mb-2" alt="Escudo Adversário"
+                 loading="lazy">
+            <div class="fw-bold small">Adversário</div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top flex-wrap gap-2">
+          <span class="text-muted small">Estádio Teste</span>
+          <button type="button" class="btn btn-sm btn-outline-primary btn-details-match">Detalhes</button>
+        </div>
+      </div>
+    `;
+
+    return article;
+  }
+
+  function announceToScreenReader(message) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'visually-hidden';
+    announcement.textContent = message;
+    document.body.appendChild(announcement);
+
+    setTimeout(() => {
+      document.body.removeChild(announcement);
+    }, 1000);
+  }
+}
+
+/**
+ * Pointer Events (T07)
+ * Implementação de gesto com Pointer Events e alternativa por botão
+ */
+function initPointerEvents() {
+  const matchesList = document.querySelector('.matches-list');
+
+  if (!matchesList) return;
+
+  let startX = 0;
+  let isDragging = false;
+  let currentMatch = null;
+
+  // Pointer down - início do gesto
+  matchesList.addEventListener('pointerdown', function(e) {
+    const matchCard = e.target.closest('.match-card');
+    if (!matchCard) return;
+
+    currentMatch = matchCard;
+    startX = e.clientX;
+    isDragging = true;
+    matchesList.setPointerCapture(e.pointerId);
+
+    // Feedback visual
+    matchCard.style.transition = 'transform 0.1s';
+  });
+
+  // Pointer move - durante o gesto
+  matchesList.addEventListener('pointermove', function(e) {
+    if (!isDragging || !currentMatch) return;
+
+    const diff = e.clientX - startX;
+    const threshold = 50;
+
+    // Feedback visual de arraste
+    if (Math.abs(diff) < threshold) {
+      currentMatch.style.transform = `translateX(${diff}px)`;
+    }
+  });
+
+  // Pointer up - fim do gesto
+  matchesList.addEventListener('pointerup', function(e) {
+    if (!isDragging || !currentMatch) return;
+
+    const diff = e.clientX - startX;
+    const threshold = 50;
+
+    // Swipe para direita - favoritar
+    if (diff > threshold) {
+      toggleMatchFavorite(currentMatch);
+    }
+    // Swipe para esquerda - remover
+    else if (diff < -threshold) {
+      removeMatch(currentMatch);
+    }
+
+    // Reset visual
+    currentMatch.style.transform = '';
+    currentMatch.style.transition = '';
+    isDragging = false;
+    currentMatch = null;
+    matchesList.releasePointerCapture(e.pointerId);
+  });
+
+  // Pointer cancel - gesto cancelado
+  matchesList.addEventListener('pointercancel', function(e) {
+    if (currentMatch) {
+      currentMatch.style.transform = '';
+      currentMatch.style.transition = '';
+    }
+    isDragging = false;
+    currentMatch = null;
+    matchesList.releasePointerCapture(e.pointerId);
+  });
+
+  function toggleMatchFavorite(matchCard) {
+    matchCard.classList.toggle('border-warning');
+    matchCard.classList.toggle('border-info');
+
+    const isFavorite = matchCard.classList.contains('border-warning');
+    const message = isFavorite ? 'Jogo adicionado aos favoritos' : 'Jogo removido dos favoritos';
+    announceToScreenReader(message);
+  }
+
+  function removeMatch(matchCard) {
+    matchCard.style.opacity = '0';
+    matchCard.style.transform = 'translateX(-100%)';
+
+    setTimeout(() => {
+      matchCard.remove();
+      announceToScreenReader('Jogo removido da lista');
+    }, 300);
+  }
+
+  function announceToScreenReader(message) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'visually-hidden';
+    announcement.textContent = message;
+    document.body.appendChild(announcement);
+
+    setTimeout(() => {
+      document.body.removeChild(announcement);
+    }, 1000);
+  }
+}
