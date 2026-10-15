@@ -116,11 +116,35 @@ Escolhido por:
 
 ### Tema Filho: Portal Esportivo
 
-#### Estrutura
+#### Estrutura Atual (Implementada)
 ```
 wordpress/tema-filho/
 ├─ style.css              # CSS custom e import do pai
 ├─ functions.php          # Hooks e funcionalidades
+├─ theme.json             # Configurações do editor de blocos
+├─ page-home.php          # Template personalizado da página inicial
+└─ functions.php          # CPT, Taxonomia, Meta Boxes
+```
+
+#### Funcionalidades Implementadas em functions.php
+- Enfileirar scripts e estilos
+- **Custom Post Type: Jogos** - Para gerenciar jogos do campeonato
+- **Taxonomia: Times** - Para categorizar jogos por time
+- **Meta Boxes:** Data, horário e estádio para cada jogo
+
+#### Arquivos Criados
+- ✅ `style.css` - CSS do tema filho
+- ✅ `functions.php` - Funções PHP completas
+- ✅ `theme.json` - Configurações do editor de blocos
+- ✅ `page-home.php` - Template da página inicial
+
+#### Estrutura Futura (para implementação completa)
+```
+wordpress/tema-filho/
+├─ style.css              # CSS custom e import do pai
+├─ functions.php          # Hooks e funcionalidades
+├─ theme.json             # Configurações do editor de blocos
+├─ page-home.php          # Template personalizado da página inicial
 ├─ index.php              # Template principal
 ├─ single.php             # Template de post individual
 ├─ page.php               # Template de página

@@ -1,0 +1,21 @@
+/*
+Theme Name: Portal Esportivo
+Theme URI: https://exemplo.com
+Description: Tema filho do Twenty Twenty-Four para portal esportivo
+Author: Seu Nome
+Author URI: https://exemplo.com
+Template: twentytwentyfour
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: portal-esportivo
+*/
+
+/* Importar CSS do tema pai */
+@import url('../twentytwentyfour/style.css');
+
+/* Customizações do Portal Esportivo */
+:root {
+  --color-primary: #1e40af;
+  --color-secondary: #3b82f6;
+}

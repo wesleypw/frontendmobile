@@ -257,4 +257,4 @@ Este documento registra as decisões técnicas tomadas durante o desenvolvimento
 | 2026-10-14 | Implementação de container queries | Cards de jogos adaptam ao tamanho do container |
 | 2026-10-14 | Delegação de eventos em lista dinâmica | Melhor performance para itens criados dinamicamente |
 | 2026-10-14 | Pointer Events para gestos | Swipe em cards de jogos com feedback visual |
-| 2026-10-14 | jQuery 4.0 para interações específicas | Demonstração de conhecimento da biblioteca (removido - projeto limitado a HTML/CSS/JS puro) |
+| 2026-10-14 | jQuery 4.0 para interações específicas | Demonstração de conhecimento da biblioteca |

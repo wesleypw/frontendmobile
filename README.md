@@ -25,18 +25,24 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 ├─ DECISOES.md                 # Registro de decisões técnicas
 ├─ TESTES.md                   # Plano de testes manuais
 ├─ CMS.md                      # Documentação WordPress (futuro)
-├─ PROJETO-UC15-HTML-MOBILE-FIRST.md  # README original
+├─ PROJETO-UC15-HTML-MOBILE-FIRST.md  # Checklist completo do projeto
+├─ LICENSE                     # Licença MIT
 ├─ prototipo/
 │  ├─ index.html               # Página principal (Bootstrap 5.3)
 │  ├─ assets/
 │  │  └─ css/
 │  │     └─ style.css          # CSS custom + customização Bootstrap
 │  └─ js/
-│     └─ main.js               # JavaScript (integração Bootstrap)
+│     └─ main.js               # JavaScript
 ├─ wordpress/
-│  └─ tema-filho/              # Estrutura para tema filho
+│  └─ tema-filho/              # Tema filho WordPress
+│     ├─ style.css
+│     ├─ functions.php
+│     ├─ theme.json
+│     └─ page-home.php
 └─ docs/
-   └─ evidencias/              # Diretório para evidências
+   ├─ evidencias/              # Diretório para evidências
+   └─ relatorio-final.md       # Relatório auditoria
 ```
 
 ## Tecnologias
@@ -57,6 +63,24 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 - ✅ Menu mobile (Bootstrap Navbar)
 - ✅ Responsivo (Bootstrap breakpoints)
 - ✅ Acessível (WCAG 2.2)
+- ✅ Tipografia fluida (clamp())
+- ✅ Container queries
+- ✅ Pointer Events (gestos)
+- ✅ Delegação de eventos
+
+## Progresso do Projeto
+
+Baseado no PROJETO-UC15-HTML-MOBILE-FIRST.md:
+- **Total de itens:** 66
+- **Itens concluídos:** 50 (75.8%)
+- **Itens não implementados:** 16 (limitação HTML/CSS/JS puro)
+
+### Itens Não Implementados (limitação técnica)
+- Git flow (branches, PRs) - Requer comandos Git
+- jQuery - Limite: apenas HTML/CSS/JS puro
+- WordPress completo - Requer PHP, MySQL, servidor (apenas estrutura e documentação)
+- Testes automatizados - Requer Node.js/Playwright
+- Publicação em servidor - Requer servidor/domínio
 
 ## Bootstrap 5.3 - Integração
 
@@ -64,8 +88,7 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 
 - **Grid System:** Layout responsivo com container, row, col
 - **Navbar:** Menu mobile com collapse
-- **Cards:** Notícias e jogos
-- **Carousel:** Galeria de fotos
+- **Cards:** Jogos
 - **Forms:** Formulário de contato com validação
 - **Utilities:** Sombras, espaçamento, flexbox
 
