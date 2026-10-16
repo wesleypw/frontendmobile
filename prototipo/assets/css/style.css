@@ -75,6 +75,29 @@
   top: 0;
 }
 
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-page .site-main {
+  display: flex;
+  flex: 1 0 auto;
+}
+
+.auth-page .site-main > .container {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.auth-page #login-gate {
+  flex: 1 0 auto;
+  align-items: center;
+  padding-block: 1rem;
+}
+
 /* ========================================
    ACESSIBILIDADE
    ======================================== */
@@ -198,6 +221,28 @@
 .match-card .team-crest {
   width: 60px;
   height: 60px;
+  object-fit: contain;
+}
+
+.match-carousel {
+  padding-bottom: 2.5rem;
+}
+
+.match-carousel .carousel-indicators [data-bs-target] {
+  background-color: var(--bs-primary);
+}
+
+.match-carousel .carousel-control-prev-icon,
+.match-carousel .carousel-control-next-icon {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(67%) saturate(2154%) hue-rotate(212deg) brightness(91%) contrast(94%);
+}
+
+.match-feature {
+  min-height: 25rem;
+  padding-bottom: 4.5rem !important;
+}
+
+.match-feature .team-crest {
   object-fit: contain;
 }
 

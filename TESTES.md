@@ -47,6 +47,21 @@ Este documento define os testes manuais para validar o projeto com Bootstrap 5.3
 **Esperado:** Grid Bootstrap se adapta (1 col mobile, 2 col tablet/desktop)
 **Observado:** _______________
 
+### TM-06: Login, Carrossel e Favoritos
+**Passos:**
+1. Abrir `prototipo/index.html`, escolher um time em "Seu time favorito" e salvar
+2. Abrir `prototipo/favoritos.html` sem ter feito login e confirmar que o time escolhido aparece em "Meus favoritos"
+3. Tentar enviar o formulário de login vazio e depois entrar com um e-mail válido e senha de pelo menos 6 caracteres
+4. Alterar o time favorito e confirmar que a nova escolha aparece também em `index.html`
+5. Avançar e voltar os slides; adicionar e remover jogos dos favoritos
+6. Recarregar as páginas e verificar que o time e os jogos continuam salvos
+7. Remover o time favorito e confirmar que ele deixa de aparecer
+8. Sair e confirmar que o conteúdo privado fica oculto até entrar novamente
+**Esperado:** A escolha do time fica sincronizada entre as páginas e persiste no navegador; o conteúdo privado da página de favoritos só aparece após o login demonstrativo.
+**Observado:** _______________
+
+> O login é apenas demonstrativo e não oferece segurança real. Não usar credenciais reais.
+
 ## Testes de Responsividade (Bootstrap Breakpoints)
 
 ### TR-01: Extra Small (< 576px)

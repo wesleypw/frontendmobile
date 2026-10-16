@@ -29,11 +29,13 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 ├─ LICENSE                     # Licença MIT
 ├─ prototipo/
 │  ├─ index.html               # Página principal (Bootstrap 5.3)
+│  ├─ favoritos.html           # Página de destaques e favoritos com acesso demonstrativo
 │  ├─ assets/
 │  │  └─ css/
 │  │     └─ style.css          # CSS custom + customização Bootstrap
 │  └─ js/
-│     └─ main.js               # JavaScript
+│     ├─ main.js               # JavaScript
+│     └─ carrossel-favoritos.js # Login demonstrativo e favoritos
 ├─ wordpress/
 │  └─ tema-filho/              # Tema filho WordPress
 │     ├─ style.css
@@ -59,7 +61,10 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 - ✅ Home com destaque
 - ✅ Calendário de jogos
 - ✅ Classificação
+- ✅ Escolha de time favorito na página inicial, sincronizada com a página de favoritos
 - ✅ Formulário de contato (Bootstrap validation)
+- ✅ Carrossel de jogos e lista de favoritos
+- ✅ Acesso demonstrativo à página de favoritos (e-mail válido e senha de 6+ caracteres)
 - ✅ Menu mobile (Bootstrap Navbar)
 - ✅ Responsivo (Bootstrap breakpoints)
 - ✅ Acessível (WCAG 2.2)
@@ -68,6 +73,8 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 - ✅ Pointer Events (gestos)
 - ✅ Delegação de eventos
 - ✅ Imagens responsivas (srcset/sizes, lazy loading)
+
+> **Importante:** o login da página de favoritos é apenas uma demonstração no navegador. Como o projeto é estático, não há validação de credenciais nem proteção real dos arquivos; para produção, implemente autenticação e autorização em um backend.
 
 ## Progresso do Projeto
 

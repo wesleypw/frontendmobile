@@ -9,7 +9,74 @@ document.addEventListener('DOMContentLoaded', function() {
   initActiveNavLink();
   initDynamicListDelegation();
   initPointerEvents();
+  initFavoriteTeam();
 });
+
+function initFavoriteTeam() {
+  const storageKey = 'portalEsportivoFavoriteTeam';
+  const form = document.getElementById('favorite-team-home-form');
+  const select = document.getElementById('favorite-team-home');
+  const display = document.getElementById('favorite-team-home-display');
+
+  if (!form || !select || !display) return;
+
+  const teams = {
+    aurora: { name: 'Aurora Central', crest: 'img/escudo-centro.svg' },
+    estrela: { name: 'Estrela do Oriente', crest: 'img/escudo-leste.svg' },
+    'falcões': { name: 'Falcões do Norte', crest: 'img/escudo-norte.svg' },
+    tempestade: { name: 'Tempestade Austral', crest: 'img/escudo-sul.svg' },
+    'leões': { name: 'Leões do Oeste', crest: 'img/escudo-oeste.svg' }
+  };
+
+  function renderFavoriteTeam() {
+    const teamId = localStorage.getItem(storageKey);
+    const team = teams[teamId];
+    display.replaceChildren();
+
+    if (!team) {
+      select.value = '';
+      return;
+    }
+
+    select.value = teamId;
+
+    const card = document.createElement('article');
+    card.className = 'card bg-light';
+
+    const body = document.createElement('div');
+    body.className = 'card-body d-flex flex-wrap align-items-center gap-3';
+
+    const crest = document.createElement('img');
+    crest.src = team.crest;
+    crest.width = 48;
+    crest.height = 54;
+    crest.className = 'team-crest';
+    crest.alt = `Escudo do ${team.name}`;
+
+    const name = document.createElement('p');
+    name.className = 'fw-bold mb-0';
+    name.textContent = `Seu time favorito: ${team.name}`;
+
+    body.append(crest, name);
+    card.append(body);
+    display.append(card);
+  }
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    localStorage.setItem(storageKey, select.value);
+    renderFavoriteTeam();
+  });
+
+  window.addEventListener('storage', function(event) {
+    if (event.key === storageKey) renderFavoriteTeam();
+  });
+
+  renderFavoriteTeam();
+}
 
 /**
  * Formulário de Contato
