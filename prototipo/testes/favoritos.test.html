@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testes do Portal Esportivo</title>
+  <style>
+    body {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      font-family: system-ui, sans-serif;
+      line-height: 1.5;
+      color: #111827;
+    }
+
+    #test-results {
+      padding-left: 1.5rem;
+    }
+
+    .pass {
+      color: #166534;
+    }
+
+    .fail {
+      color: #b91c1c;
+    }
+
+    iframe {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+  </style>
+  <script src="favoritos.test.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Testes do Portal Esportivo</h1>
+    <p id="test-status" role="status" aria-live="polite">Executando testes...</p>
+    <ol id="test-results" aria-label="Resultados dos testes"></ol>
+    <iframe id="app-frame" title="Aplicação sob teste"></iframe>
+  </main>
+</body>
+</html>
