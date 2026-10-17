@@ -54,7 +54,15 @@ Portal mobile-first para acompanhar uma temporada esportiva, desenvolvido com HT
 - **JavaScript ES6+:** Nativo, Bootstrap JS bundle
 - **Bootstrap 5.3.3:** Grid, componentes mobile, utilities
 
-> **NOTA:** Projeto limitado a HTML, CSS e JavaScript puro. Sem jQuery, sem testes automatizados, sem ferramentas de build.
+> **NOTA:** Projeto limitado a HTML, CSS e JavaScript puro. Os testes automatizados de interface rodam no navegador, sem dependências ou ferramentas de build.
+
+### Executar os testes do portal
+
+1. Na raiz do projeto, inicie um servidor local com `python -m http.server 8000`
+2. Abra `http://localhost:8000/prototipo/testes/favoritos.test.html` no navegador
+3. Confira o resultado de cada teste na página
+
+O executor testa as páginas `index.html` e `favoritos.html`, incluindo navegação, calendário, validação do contato, login, escolha e persistência do time e favoritos de jogos. Os dados locais existentes são restaurados ao final.
 
 ## Funcionalidades
 

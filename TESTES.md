@@ -62,6 +62,11 @@ Este documento define os testes manuais para validar o projeto com Bootstrap 5.3
 
 > O login é apenas demonstrativo e não oferece segurança real. Não usar credenciais reais.
 
+### Testes automatizados das duas páginas
+**Execução:** Iniciar `python -m http.server 8000` na raiz do projeto e abrir `http://localhost:8000/prototipo/testes/favoritos.test.html`.
+**Cobertura:** `index.html` (navegação, seções, calendário, formulário de contato e time favorito) e `favoritos.html` (login, carrossel/favoritos e sincronização do time).
+**Esperado:** O executor informa os testes aprovados ou com falha e restaura os dados locais anteriores ao teste.
+
 ## Testes de Responsividade (Bootstrap Breakpoints)
 
 ### TR-01: Extra Small (< 576px)
